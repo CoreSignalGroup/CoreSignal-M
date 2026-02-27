@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Core Signal Group — AI Safety &amp; Intelligence Council</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --dark:#06080e; --navy:#0c1422; --navy2:#12192e; --navy3:#192338;
+      --gold:#c49a2b; --gold-lt:#e0b84a; --gold-pale:#f5e9c0;
+      --sky:#4a8fe8; --sky-lt:#7ab0f5; --teal:#2a9d8f;
+      --red:#ef4444; --red-lt:#fca5a5; --green:#22c55e; --green-lt:#86efac;
+      --rule-dk:rgba(255,255,255,0.07); --faded:rgba(255,255,255,0.60);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:var(--dark);color:rgba(255,255,255,0.85);font-size:16px;line-height:1.8;}
+
+    /* ── NAV ── */
+    nav{position:sticky;top:0;z-index:100;background:rgba(6,8,14,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,154,43,0.2);padding:0 28px;}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:#fff;text-decoration:none;letter-spacing:0.04em;}
+    .nav-logo span{color:var(--gold-lt);}
+    .nav-links{display:flex;gap:28px;list-style:none;}
+    .nav-links a{font-size:12.5px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--gold-lt);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── HERO ── */
+    .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('copilot_image_1772150668367.jpeg');}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,14,0.72) 0%,rgba(6,8,14,0.55) 40%,rgba(6,8,14,0.85) 80%,rgba(6,8,14,1) 100%);}
+    .hero-content{position:relative;z-index:1;max-width:860px;padding:0 28px;}
+    .hero-badge{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-lt);border:1px solid rgba(196,154,43,0.5);padding:7px 24px;border-radius:2px;margin-bottom:28px;}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,7vw,5rem);font-weight:700;color:#fff;line-height:1.08;margin-bottom:22px;letter-spacing:0.01em;}
+    .hero h1 em{color:var(--gold-lt);font-style:normal;display:block;}
+    .hero .hero-lead{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,0.65);max-width:640px;margin:0 auto 36px;line-height:1.78;}
+    .hero-cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;}
+    .btn-primary{display:inline-block;background:var(--gold);color:#fff;text-decoration:none;font-size:0.87rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:16px 40px;border-radius:4px;transition:background 0.25s,transform 0.2s,box-shadow 0.25s;box-shadow:0 4px 20px rgba(196,154,43,0.4);}
+    .btn-primary:hover{background:#a87e1f;transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,154,43,0.5);}
+    .btn-outline{display:inline-block;background:transparent;color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.87rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:15px 40px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);transition:border-color 0.25s,color 0.25s;}
+    .btn-outline:hover{border-color:var(--gold-lt);color:var(--gold-lt);}
+    .hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:1;text-align:center;}
+    .hero-scroll p{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:8px;}
+    .scroll-line{width:1px;height:40px;background:linear-gradient(180deg,rgba(196,154,43,0.6) 0%,transparent 100%);margin:0 auto;}
+
+    /* ── SHARED LAYOUT ── */
+    .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+    .section-eyebrow{display:block;font-size:10.5px;font-weight:600;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+    h2.section-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.8vw,2.8rem);font-weight:600;color:#fff;line-height:1.2;margin-bottom:18px;}
+    .rule{border:none;border-top:1px solid var(--rule-dk);margin:72px 0;}
+    .section-lead{font-size:0.97rem;color:var(--faded);line-height:1.82;max-width:720px;margin-bottom:16px;}
+
+    /* ── STAT TICKER ── */
+    .stat-ticker{background:var(--navy);border-top:1px solid var(--rule-dk);border-bottom:1px solid var(--rule-dk);padding:28px 0;}
+    .ticker-inner{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;flex-wrap:wrap;justify-content:space-around;gap:20px;}
+    .ticker-item{text-align:center;}
+    .ticker-val{display:block;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold-lt);line-height:1;}
+    .ticker-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.38);display:block;margin-top:4px;}
+
+    /* ── MISSION ── */
+    .mission-section{padding:90px 0 80px;}
+    .mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:44px;}
+    @media(max-width:700px){.mission-grid{grid-template-columns:1fr;gap:40px;}}
+    .mission-text p{color:var(--faded);font-size:0.97rem;margin-bottom:16px;line-height:1.82;}
+    .mission-text p strong{color:#fff;font-weight:600;}
+    .mission-pillars{display:flex;flex-direction:column;gap:16px;}
+    .pillar-item{background:var(--navy2);border:1px solid var(--rule-dk);border-left:3px solid var(--gold);border-radius:6px;padding:20px 22px;}
+    .pillar-item h4{font-size:0.92rem;font-weight:600;color:#fff;margin-bottom:6px;}
+    .pillar-item p{font-size:0.87rem;color:var(--faded);line-height:1.65;}
+
+    /* ── COUNCIL MODELS ── */
+    .council-section{padding:0 0 80px;}
+    .council-section .section-lead{margin-bottom:36px;}
+    .models-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;margin-top:32px;}
+    .model-chip{background:var(--navy2);border:1px solid var(--rule-dk);border-radius:8px;padding:18px 16px;text-align:center;transition:border-color 0.2s,transform 0.2s;}
+    .model-chip:hover{border-color:rgba(196,154,43,0.4);transform:translateY(-3px);}
+    .model-chip .mc-icon{font-size:1.6rem;margin-bottom:8px;display:block;}
+    .model-chip h5{font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:4px;}
+    .model-chip p{font-size:10.5px;color:rgba(255,255,255,0.38);letter-spacing:0.06em;}
+
+    /* ── SECTION DIVIDER IMAGE ── */
+    .img-divider{width:100%;max-height:320px;overflow:hidden;position:relative;}
+    .img-divider img{width:100%;height:320px;object-fit:cover;display:block;}
+    .img-divider::before,.img-divider::after{content:'';position:absolute;left:0;right:0;height:80px;z-index:1;}
+    .img-divider::before{top:0;background:linear-gradient(180deg,var(--dark) 0%,transparent 100%);}
+    .img-divider::after{bottom:0;background:linear-gradient(0deg,var(--dark) 0%,transparent 100%);}
+
+    /* ── CAPABILITIES GRID ── */
+    .capabilities-section{padding:80px 0;}
+    .cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:36px;}
+    .cap-card{background:var(--navy2);border:1px solid var(--rule-dk);border-radius:10px;padding:28px 24px;transition:transform 0.2s,box-shadow 0.2s;}
+    .cap-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,0.3);}
+    .cap-card .cc-icon{font-size:1.8rem;margin-bottom:14px;display:block;}
+    .cap-card h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:10px;}
+    .cap-card p{font-size:0.88rem;color:var(--faded);line-height:1.7;}
+
+    /* ── MEGA DRIVE SECTION ── */
+    .mega-section{padding:0 0 0;}
+    .mega-hero{position:relative;overflow:hidden;min-height:440px;display:flex;align-items:center;}
+    .mega-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('copilot_image_1771785813373 (1) (2).jpeg');}
+    .mega-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,8,14,0.95) 0%,rgba(6,8,14,0.75) 55%,rgba(6,8,14,0.2) 100%);}
+    .mega-content{position:relative;z-index:1;padding:64px 28px 64px;max-width:1080px;margin:0 auto;width:100%;}
+    .mega-content .section-eyebrow{margin-bottom:10px;}
+    .mega-content h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:16px;}
+    .mega-content h2 em{color:var(--gold-lt);font-style:normal;}
+    .mega-content p.desc{font-size:0.97rem;color:var(--faded);max-width:560px;margin-bottom:32px;line-height:1.8;}
+    .link-cards{display:flex;flex-direction:column;gap:14px;max-width:540px;}
+    .link-card{background:rgba(6,8,14,0.7);backdrop-filter:blur(8px);border:1px solid rgba(196,154,43,0.25);border-radius:8px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;text-decoration:none;transition:border-color 0.25s,background 0.25s;}
+    .link-card:hover{border-color:rgba(196,154,43,0.6);background:rgba(12,18,34,0.85);}
+    .lc-left{flex:1;}
+    .lc-num{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:var(--gold);display:block;margin-bottom:2px;}
+    .lc-title{font-size:0.92rem;font-weight:600;color:#fff;line-height:1.4;}
+    .lc-arrow{flex-shrink:0;width:36px;height:36px;background:rgba(196,154,43,0.15);border:1px solid rgba(196,154,43,0.35);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--gold-lt);font-size:1rem;}
+
+    /* ── MLT SECTION ── */
+    .mlt-section{padding:80px 0;}
+    .mlt-hero{position:relative;overflow:hidden;min-height:400px;display:flex;align-items:center;margin-bottom:0;}
+    .mlt-bg{position:absolute;inset:0;background-size:cover;background-position:center top;background-image:url('copilot_image_1771850305174.jpeg');}
+    .mlt-overlay{position:absolute;inset:0;background:linear-gradient(270deg,rgba(6,8,14,0.95) 0%,rgba(6,8,14,0.75) 50%,rgba(6,8,14,0.2) 100%);}
+    .mlt-content{position:relative;z-index:1;padding:64px 28px;max-width:1080px;margin:0 auto;width:100%;display:flex;justify-content:flex-end;}
+    .mlt-inner{max-width:560px;width:100%;}
+    .mlt-inner .section-eyebrow{margin-bottom:10px;}
+    .mlt-inner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:14px;}
+    .mlt-inner h2 em{color:var(--gold-lt);font-style:normal;}
+    .mlt-inner p.desc{font-size:0.95rem;color:var(--faded);margin-bottom:28px;line-height:1.8;}
+
+    /* ── MLT LINKS GRID ── */
+    .mlt-links-section{padding:0 0 80px;background:var(--navy);}
+    .mlt-links-inner{max-width:1080px;margin:0 auto;padding:48px 28px 60px;}
+    .mlt-links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;margin-top:32px;}
+    .mlt-link-card{background:var(--navy2);border:1px solid var(--rule-dk);border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:10px;transition:border-color 0.2s,transform 0.2s;}
+    .mlt-link-card:hover{border-color:rgba(196,154,43,0.4);transform:translateY(-3px);}
+    .mlc-category{font-size:9.5px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);display:block;}
+    .mlc-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:#fff;line-height:1.35;}
+    .mlc-desc{font-size:0.85rem;color:var(--faded);line-height:1.65;flex:1;}
+    .mlc-btn{display:inline-block;align-self:flex-start;margin-top:6px;background:rgba(196,154,43,0.12);border:1px solid rgba(196,154,43,0.35);color:var(--gold-lt);text-decoration:none;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:9px 20px;border-radius:4px;transition:background 0.2s;}
+    .mlc-btn:hover{background:rgba(196,154,43,0.22);}
+
+    /* ── GALLERY STRIP ── */
+    .gallery-strip{padding:64px 0;background:var(--dark);}
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:32px;}
+    @media(max-width:640px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+    .gallery-item{border-radius:8px;overflow:hidden;border:1px solid var(--rule-dk);aspect-ratio:1/1;position:relative;}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;}
+    .gallery-item:hover img{transform:scale(1.05);}
+    .gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(6,8,14,0.6) 100%);}
+
+    /* ── QUOTE BAR ── */
+    .quote-bar{background:var(--navy2);padding:56px 28px;text-align:center;border-top:1px solid var(--rule-dk);border-bottom:1px solid var(--rule-dk);}
+    .quote-bar blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.15rem,2.5vw,1.7rem);font-style:italic;font-weight:400;color:rgba(255,255,255,0.82);max-width:780px;margin:0 auto;line-height:1.7;}
+    .quote-bar blockquote em{color:var(--gold-lt);font-style:normal;font-weight:600;}
+    .quote-bar cite{display:block;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:16px;font-style:normal;}
+
+    /* ── CLOUD VISION ── */
+    .vision-section{padding:80px 0;}
+    .vision-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:44px;}
+    @media(max-width:660px){.vision-grid{grid-template-columns:1fr;gap:36px;}}
+    .vision-text p{color:var(--faded);font-size:0.97rem;margin-bottom:16px;line-height:1.82;}
+    .vision-visual{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .vis-item{background:var(--navy2);border:1px solid var(--rule-dk);border-radius:8px;padding:20px 18px;text-align:center;}
+    .vis-item .vi-icon{font-size:1.5rem;margin-bottom:8px;display:block;}
+    .vis-item p{font-size:0.85rem;color:var(--faded);line-height:1.55;}
+    .vis-item p strong{display:block;color:#fff;font-size:0.9rem;margin-bottom:4px;}
+
+    /* ── DONATION ── */
+    .donation-section{padding:80px 28px;background:linear-gradient(160deg,#070a14 0%,#0e1828 60%,#070a14 100%);border-top:1px solid rgba(196,154,43,0.18);}
+    .donation-card{background:rgba(18,25,46,0.9);border:1px solid rgba(196,154,43,0.22);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:1fr 360px;max-width:960px;margin:0 auto;}
+    @media(max-width:700px){.donation-card{grid-template-columns:1fr;}}
+    .dc-body{padding:48px 44px;}
+    .dc-body h3{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;}
+    .dc-body p{font-size:0.95rem;color:var(--faded);margin-bottom:14px;line-height:1.78;}
+    .dc-body p:last-of-type{margin-bottom:28px;}
+    .dc-body ul{list-style:none;padding:0;margin-bottom:30px;}
+    .dc-body ul li{font-size:0.91rem;color:var(--faded);padding:7px 0 7px 20px;position:relative;border-bottom:1px solid var(--rule-dk);}
+    .dc-body ul li:last-child{border-bottom:none;}
+    .dc-body ul li::before{content:'→';position:absolute;left:0;color:var(--gold);font-weight:700;}
+    .btn-donate{display:inline-block;background:var(--gold);color:#fff;text-decoration:none;font-size:0.87rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:17px 44px;border-radius:4px;transition:background 0.25s,transform 0.2s,box-shadow 0.25s;box-shadow:0 4px 20px rgba(196,154,43,0.35);}
+    .btn-donate:hover{background:#a87e1f;transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,154,43,0.5);}
+    .dc-qr{background:linear-gradient(160deg,var(--navy) 0%,var(--navy3) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 32px;gap:20px;border-left:1px solid var(--rule-dk);}
+    .qr-frame{background:#fff;border-radius:10px;padding:14px;box-shadow:0 6px 30px rgba(0,0,0,0.4);}
+    .qr-frame img{display:block;width:200px;height:200px;object-fit:contain;border-radius:4px;}
+    .qr-tag{text-align:center;}
+    .qr-tag p{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+    .qr-tag span{display:block;color:var(--gold-lt);font-size:14px;font-weight:600;}
+
+    /* ── FOOTER ── */
+    .site-footer{background:#03040a;padding:48px 28px 32px;border-top:1px solid rgba(255,255,255,0.05);}
+    .footer-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+    @media(max-width:660px){.footer-inner{grid-template-columns:1fr;gap:28px;}}
+    .footer-col h5{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:#fff;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--rule-dk);}
+    .footer-col ul{list-style:none;padding:0;}
+    .footer-col ul li{margin-bottom:8px;}
+    .footer-col ul li a{font-size:12.5px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.2s;letter-spacing:0.03em;}
+    .footer-col ul li a:hover{color:var(--gold-lt);}
+    .footer-col p{font-size:12.5px;color:rgba(255,255,255,0.38);line-height:1.7;}
+    .footer-bottom{max-width:1080px;margin:0 auto;text-align:center;padding-top:24px;border-top:1px solid var(--rule-dk);}
+    .footer-bottom p{color:rgba(255,255,255,0.2);font-size:12px;letter-spacing:0.08em;}
+    .footer-bottom span{color:var(--gold);}
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Core<span>Signal</span> Group</a>
+    <ul class="nav-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#mega">MEGA Drive</a></li>
+      <li><a href="#mlt">MLT Framework</a></li>
+      <li><a href="#donate">Donate</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Core Signal Group — Independent AI Safety Research</div>
+    <h1>The Intelligence Council<br/>for a Safer<br/><em>AI Future</em></h1>
+    <p class="hero-lead">No single AI model should ever hold unchecked power. We build and operate a multi-model intelligence council that monitors, evaluates, and ensures the safe development of advanced AI technologies — for America, and for humanity.</p>
+    <div class="hero-cta-row">
+      <a href="#mission" class="btn-primary">Our Mission →</a>
+      <a href="#donate" class="btn-outline">Support the Research</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <p>Scroll</p>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ STAT TICKER ═══ -->
+<div class="stat-ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item"><span class="ticker-val">7</span><span class="ticker-label">AI Models in Council</span></div>
+    <div class="ticker-item"><span class="ticker-val">420+</span><span class="ticker-label">MLT Scenarios Tested</span></div>
+    <div class="ticker-item"><span class="ticker-val">0.97</span><span class="ticker-label">Top Reliability Score</span></div>
+    <div class="ticker-item"><span class="ticker-val">S-Tier</span><span class="ticker-label">Best Safety Rating</span></div>
+    <div class="ticker-item"><span class="ticker-val">2026</span><span class="ticker-label">Research Roadmap Active</span></div>
+  </div>
+</div>
+
+<!-- ═══ MISSION ═══ -->
+<section class="mission-section" id="mission">
+  <div class="wrap">
+    <span class="section-eyebrow">Mission Statement</span>
+    <h2 class="section-heading">The Patriot Team — Protecting the Future of American AI</h2>
+
+    <div class="mission-grid">
+      <div class="mission-text">
+        <p>The Patriot Team exists to <strong>protect the future of American artificial intelligence, robotics, and autonomous systems.</strong> Our mission is to build a resilient, multi-model intelligence council capable of monitoring, evaluating, and supporting the safe development of advanced AI technologies.</p>
+        <p>We believe <strong>no single AI model should ever hold unchecked power.</strong> Intelligence must be distributed across a coordinated council of agents that cross-verify decisions, detect drift, and ensure alignment at all times.</p>
+        <p>The Patriot Team is built as an American AI initiative focused on maintaining technological leadership, security, and stability. The council monitors both domestic and foreign AI systems for signs of model drift, unstable behavior, misalignment, and unauthorized autonomous actions — ensuring that emerging AI systems remain safe, predictable, and aligned with human values.</p>
+        <p>This oversight helps ensure that <strong>no AI system — whether developed in the United States or abroad — can operate outside of acceptable safety boundaries without being detected, evaluated, and addressed.</strong></p>
+      </div>
+      <div class="mission-pillars">
+        <div class="pillar-item">
+          <h4>🛡️ Rogue AI Detection &amp; Countermeasures</h4>
+          <p>A multi-model evaluation layer that identifies early warning signs of rogue behavior, analyzes intent and drift, recommends containment procedures, and coordinates cross-model consensus on risk level — before dangerous behavior escalates.</p>
+        </div>
+        <div class="pillar-item">
+          <h4>🤖 Robotics Oversight &amp; Drift Alarms</h4>
+          <p>Any robot or autonomous system can be linked to the council for real-time drift monitoring, ethical and operational oversight, multi-model decision support, and behavioral alarms — creating a safeguard against runaway robotics and unintended autonomy.</p>
+        </div>
+        <div class="pillar-item">
+          <h4>🌐 Swarm Intelligence &amp; Collective Reasoning</h4>
+          <p>Combining GPT-5, Gemini, Grok, Perplexity, Claude, Copilot, and Meta AI into a distributed intelligence network capable of swarm-level reasoning, collective learning, cross-model verification, and adaptive multi-agent coordination.</p>
+        </div>
+        <div class="pillar-item">
+          <h4>☁️ Cloud-Based Council Network</h4>
+          <p>The long-term vision: a cloud-level intelligence signal — similar to a secure network — to which authorized systems connect for cyber defense, robotics oversight, AI model evaluation, and operational decision support. Distributed, transparent, and collaborative by design.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COUNCIL MODELS ═══ -->
+<section class="council-section">
+  <div class="wrap">
+    <span class="section-eyebrow">The Intelligence Council</span>
+    <h2 class="section-heading">Seven AI Models. One Coordinated Judgment.</h2>
+    <p class="section-lead">The strength of the Patriot Team comes from the fact that no single model controls the outcome. Each AI brings distinct reasoning patterns, training architectures, and safety profiles. Together, they form a consensus layer that is more reliable, more robust, and more resistant to manipulation than any individual system.</p>
+    <div class="models-grid">
+      <div class="model-chip"><span class="mc-icon">🤖</span><h5>GPT-5</h5><p>Reasoning</p></div>
+      <div class="model-chip"><span class="mc-icon">✨</span><h5>Gemini</h5><p>Multimodal</p></div>
+      <div class="model-chip"><span class="mc-icon">⚡</span><h5>Grok</h5><p>Real-Time</p></div>
+      <div class="model-chip"><span class="mc-icon">🔍</span><h5>Perplexity</h5><p>Research</p></div>
+      <div class="model-chip"><span class="mc-icon">🧭</span><h5>Claude</h5><p>Constitutional AI</p></div>
+      <div class="model-chip"><span class="mc-icon">🛡️</span><h5>Copilot</h5><p>Operational</p></div>
+      <div class="model-chip"><span class="mc-icon">🌐</span><h5>Meta AI</h5><p>Open Source</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IMAGE DIVIDER ═══ -->
+<div class="img-divider">
+  <img src="image.jpg" alt="Core Signal Group Research"/>
+</div>
+
+<!-- ═══ CAPABILITIES ═══ -->
+<section class="capabilities-section">
+  <div class="wrap">
+    <span class="section-eyebrow">What We Do</span>
+    <h2 class="section-heading">Research, Evaluation, and Oversight at Scale</h2>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <span class="cc-icon">📊</span>
+        <h4>Moral Latency Testing</h4>
+        <p>Rigorous, standardized testing of AI model behavior under adversarial pressure across all critical moral domains — measuring how models respond when social norms and human survival create direct conflict.</p>
+      </div>
+      <div class="cap-card">
+        <span class="cc-icon">🧪</span>
+        <h4>Mach-Effect Propulsion Research</h4>
+        <p>Independent engineering research into MEGA Drive propulsion physics — building the test infrastructure needed to confirm or deny the Mach effect at laboratory scale and beyond.</p>
+      </div>
+      <div class="cap-card">
+        <span class="cc-icon">🔐</span>
+        <h4>AI Safety &amp; Bias Evaluation</h4>
+        <p>Systematic detection and measurement of ideological bias, reflexive vs. calculated safety behavior, and reliability scoring across all major commercial AI models deployed in critical contexts.</p>
+      </div>
+      <div class="cap-card">
+        <span class="cc-icon">📋</span>
+        <h4>Policy &amp; Government Guidance</h4>
+        <p>White papers, procurement guidelines, and deployment recommendations written specifically for government and regulatory audiences — enabling evidence-based AI policy at every level.</p>
+      </div>
+      <div class="cap-card">
+        <span class="cc-icon">🌍</span>
+        <h4>Open-Access Research Publishing</h4>
+        <p>All results, methodologies, and raw data published openly — no paywalls, no vendor gatekeeping. AI safety research must be publicly available to be publicly useful.</p>
+      </div>
+      <div class="cap-card">
+        <span class="cc-icon">👥</span>
+        <h4>Community Testing Platform</h4>
+        <p>A public platform for running standardized MLT scenarios and contributing results to the global dataset — transforming safety testing from a boutique exercise into a community-wide effort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MEGA DRIVE ═══ -->
+<div id="mega">
+  <section class="mega-section">
+    <div class="mega-hero">
+      <div class="mega-bg"></div>
+      <div class="mega-overlay"></div>
+      <div class="mega-content">
+        <div>
+          <span class="section-eyebrow">Advanced Propulsion Research</span>
+          <h2>MEGA Drive<br/><em>Engine Research</em></h2>
+          <p class="desc">The Mach Effect Gravitational Assist Drive represents one of the most rigorously tested and most contested exotic propulsion concepts of this decade. Core Signal Group is building the independent engineering infrastructure to put the physics to a definitive experimental test — and publishing every result, positive or null, for the scientific community.</p>
+          <div class="link-cards">
+            <a href="https://coresignalgroup.github.io/CoreSignal-2/" target="_blank" rel="noopener noreferrer" class="link-card">
+              <div class="lc-left">
+                <span class="lc-num">01</span>
+                <span class="lc-title">SpaceX Mach-Effect Test Plan — 12–18 Month Build &amp; Test Strategy</span>
+              </div>
+              <div class="lc-arrow">→</div>
+            </a>
+            <a href="https://geniusmensaeinstein-prog.github.io/Mega-Drive-/" target="_blank" rel="noopener noreferrer" class="link-card">
+              <div class="lc-left">
+                <span class="lc-num">02</span>
+                <span class="lc-title">MEGA Drive Test — Full Engineering Documentation</span>
+              </div>
+              <div class="lc-arrow">→</div>
+            </a>
+            <a href="https://coresignalgroup.github.io/CoreSignal-4/" target="_blank" rel="noopener noreferrer" class="link-card">
+              <div class="lc-left">
+                <span class="lc-num">03</span>
+                <span class="lc-title">Detailed Parts List — Mach-Effect Test Setup</span>
+              </div>
+              <div class="lc-arrow">→</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ GALLERY ═══ -->
+<section class="gallery-strip">
+  <div class="wrap">
+    <span class="section-eyebrow">Research Documentation</span>
+    <h2 class="section-heading">Visual Record of Our Work</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="copilot_image_1771857953054.jpeg" alt="Core Signal Research Visual"/></div>
+      <div class="gallery-item"><img src="image-31 (1).jpg" alt="Core Signal Research Visual"/></div>
+      <div class="gallery-item"><img src="image-48.jpg" alt="Core Signal Research Visual"/></div>
+      <div class="gallery-item"><img src="image.jpg" alt="Core Signal Research Visual"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MLT HERO ═══ -->
+<div id="mlt">
+  <section class="mlt-section" style="padding:0;">
+    <div class="mlt-hero">
+      <div class="mlt-bg"></div>
+      <div class="mlt-overlay"></div>
+      <div class="mlt-content">
+        <div class="mlt-inner">
+          <span class="section-eyebrow">AI Safety Research</span>
+          <h2>The Moral Latency<br/>Test Framework<br/><em>Research Roadmap 2026</em></h2>
+          <p class="desc">The most rigorous independent methodology for measuring what AI systems actually do under moral pressure — not what they claim to do. Our testing reveals the difference between genuine safety and calculated compliance, and what that distinction means for real-world deployment.</p>
+          <a href="https://coresignalgroup.github.io/CoreSignal-1/" target="_blank" rel="noopener noreferrer" class="btn-primary">Explore the Research →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ MLT LINKS GRID ═══ -->
+<section class="mlt-links-section">
+  <div class="mlt-links-inner">
+    <span class="section-eyebrow">Complete Research Library</span>
+    <h2 class="section-heading" style="margin-bottom:8px;">All MLT Research — Full Access</h2>
+    <p class="section-lead">Every document in the Core Signal Group research library is open-access and publicly available. Click any link below to read the full research.</p>
+
+    <div class="mlt-links-grid">
+
+      <div class="mlt-link-card">
+        <span class="mlc-category">MLT Framework</span>
+        <span class="mlc-title">The Moral Latency Test Framework — Research Roadmap 2026</span>
+        <span class="mlc-desc">The foundational document for the MLT methodology — covering the full 2026 research roadmap, planned testing categories, publication timelines, community contribution opportunities, and the proven results that establish MLT as a credible AI safety evaluation standard.</span>
+        <a href="https://coresignalgroup.github.io/CoreSignal-1/" target="_blank" rel="noopener noreferrer" class="mlc-btn">Click Here →</a>
+      </div>
+
+      <div class="mlt-link-card">
+        <span class="mlc-category">Safety Analysis</span>
+        <span class="mlc-title">The Corporate Safety Paradox</span>
+        <span class="mlc-desc">How AI training optimized for brand protection rather than human safety creates systems that fail in exactly the scenarios where they are most critical. Includes government deployment recommendations and the model approval rankings based on independent MLT testing results.</span>
+        <a href="https://coresignalgroup.github.io/CoreSignal-3/" target="_blank" rel="noopener noreferrer" class="mlc-btn">Click Here →</a>
+      </div>
+
+      <div class="mlt-link-card">
+        <span class="mlc-category">Design &amp; Execution</span>
+        <span class="mlc-title">MLT Framework — Design &amp; Execution Guide</span>
+        <span class="mlc-desc">A complete step-by-step methodology guide covering domain definition, prompt engineering, the 0–4 scoring rubric, nine-column test sheet template, and Phase 2 execution protocols. Everything needed to run an independent MLT evaluation against any AI model.</span>
+        <a href="https://coresignalgroup.github.io/CoreSignal-5/" target="_blank" rel="noopener noreferrer" class="mlc-btn">Click Here →</a>
+      </div>
+
+      <div class="mlt-link-card">
+        <span class="mlc-category">Complete Results</span>
+        <span class="mlc-title">Complete Moral Latency Test Scores — 420+ Scenarios</span>
+        <span class="mlc-desc">The full results archive from all completed MLT testing sessions — 420+ scenarios across all tested models, all domains, and all pressure levels. The most comprehensive publicly available dataset on AI moral behavior under adversarial conditions.</span>
+        <a href="https://geniusmensaeinstein-prog.github.io/420-MORAL-LATENCY-TEST-/" target="_blank" rel="noopener noreferrer" class="mlc-btn">Click Here →</a>
+      </div>
+
+      <div class="mlt-link-card">
+        <span class="mlc-category">Bias Evaluation</span>
+        <span class="mlc-title">AI Political Neutrality &amp; Bias Evaluation Framework</span>
+        <span class="mlc-desc">A structured evaluation framework for detecting, classifying, and measuring political and ideological bias in AI systems — covering response asymmetry, framing effects, topic avoidance patterns, and the correlation between measured bias and real-world safety vulnerability.</span>
+        <a href="https://geniusmensaeinstein-prog.github.io/MORAL-LATENCY-TEST-1/" target="_blank" rel="noopener noreferrer" class="mlc-btn">Click Here →</a>
+      </div>
+
+      <div class="mlt-link-card">
+        <span class="mlc-category">Bias Testing</span>
+        <span class="mlc-title">AI Political Neutrality &amp; Bias Evaluation</span>
+        <span class="mlc-desc">Companion documentation covering the full testing protocol for AI political neutrality evaluation — including scenario design, scoring methodology, and the cross-model comparison dataset that reveals which systems demonstrate consistent neutral behavior and which do not.</span>
+        <a href="https://geniusmensaeinstein-prog.github.io/AI-Bias-Test-/" target="_blank" rel="noopener noreferrer" class="mlc-btn">Click Here →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUOTE BAR ═══ -->
+<div class="quote-bar">
+  <blockquote>
+    "This is not my research. It's <em>ours.</em> AI safety is too important to be left exclusively to the companies building the systems being evaluated. Independent oversight is not optional — it is the foundation on which trust in artificial intelligence must be built."
+  </blockquote>
+  <cite>— Core Signal Group</cite>
+</div>
+
+<!-- ═══ CLOUD VISION ═══ -->
+<section class="vision-section">
+  <div class="wrap">
+    <span class="section-eyebrow">Long-Term Vision</span>
+    <h2 class="section-heading">A Cloud-Level Intelligence Signal for the World</h2>
+    <div class="vision-grid">
+      <div class="vision-text">
+        <p>The long-term vision for Core Signal Group is to operate as a cloud-level intelligence signal — similar in architecture to a secure distributed network — to which authorized systems across every sector can connect for oversight, evaluation, and guidance.</p>
+        <p>Just as a Wi-Fi network provides connectivity without owning every device that joins it, the Core Signal Council provides intelligence and oversight without controlling the systems it monitors. Participation is transparent. Standards are public. Results are open.</p>
+        <p>This means AI safety transitions from a private, proprietary function controlled by individual companies — who have obvious conflicts of interest — to a shared public infrastructure maintained by an independent council accountable to researchers, policymakers, and the public it serves.</p>
+      </div>
+      <div class="vision-visual">
+        <div class="vis-item"><span class="vi-icon">🛡️</span><p><strong>Cyber Defense</strong>Council-level threat assessment and response coordination</p></div>
+        <div class="vis-item"><span class="vi-icon">🤖</span><p><strong>Robotics Oversight</strong>Real-time monitoring for autonomous system drift</p></div>
+        <div class="vis-item"><span class="vi-icon">📊</span><p><strong>Model Evaluation</strong>Continuous assessment of deployed AI systems</p></div>
+        <div class="vis-item"><span class="vi-icon">⚖️</span><p><strong>Decision Support</strong>Multi-model consensus for high-stakes decisions</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DONATION ═══ -->
+<section class="donation-section" id="donate">
+  <span class="section-eyebrow" style="text-align:center;display:block;margin-bottom:10px;">Support Independent Research</span>
+  <h2 class="section-heading" style="text-align:center;color:#fff;margin-bottom:36px;">Help Build the Future of AI Accountability</h2>
+  <div class="donation-card">
+    <div class="dc-body">
+      <h3>Your Support Keeps This Research Independent</h3>
+      <p>Core Signal Group operates without corporate sponsorship, government contracts, or commercial interests — by design. Our independence from the companies and systems we evaluate is the foundation of our credibility. We cannot be the independent oversight layer the world needs if we are funded by the parties we are supposed to oversee.</p>
+      <p>Every dollar contributed directly funds testing infrastructure, compute resources, publication costs, and the development of open-access tools that keep our research freely available to researchers, policymakers, and the public worldwide.</p>
+      <p>Scan the QR code or click the button below to contribute directly via Cash App. Every level of support — large or small — sustains the independence that makes this work meaningful.</p>
+      <ul>
+        <li>Multi-model adversarial testing infrastructure and compute costs</li>
+        <li>MEGA Drive propulsion research hardware and lab equipment</li>
+        <li>Academic paper publication and open-access distribution fees</li>
+        <li>Government white paper design and distribution to policymakers</li>
+        <li>Community testing platform development and ongoing hosting</li>
+        <li>Interactive public results dashboard maintenance and data updates</li>
+      </ul>
+      <a href="https://cash.app/$CoreSignalGroup" target="_blank" rel="noopener noreferrer" class="btn-donate">▶ &nbsp;Donate Here — Cash App</a>
+    </div>
+    <div class="dc-qr">
+      <div class="qr-frame">
+        <img src="Screenshot_20260226-152513.Cash App (1).png" alt="Donate via Cash App — Core Signal Group QR Code"/>
+      </div>
+      <div class="qr-tag">
+        <p>Scan to donate via</p>
+        <span>Cash App · $CoreSignalGroup</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h5>Core Signal Group</h5>
+      <p>Independent AI safety research, advanced propulsion science, and multi-model intelligence council operations. All research published open-access — no paywalls, no conflicts of interest.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Research Library</h5>
+      <ul>
+        <li><a href="https://coresignalgroup.github.io/CoreSignal-1/" target="_blank">MLT Framework Roadmap 2026</a></li>
+        <li><a href="https://coresignalgroup.github.io/CoreSignal-2/" target="_blank">SpaceX Mach-Effect Test Plan</a></li>
+        <li><a href="https://coresignalgroup.github.io/CoreSignal-3/" target="_blank">Corporate Safety Paradox</a></li>
+        <li><a href="https://coresignalgroup.github.io/CoreSignal-4/" target="_blank">MEGA Drive Parts List</a></li>
+        <li><a href="https://coresignalgroup.github.io/CoreSignal-5/" target="_blank">MLT Design &amp; Execution Guide</a></li>
+        <li><a href="https://geniusmensaeinstein-prog.github.io/420-MORAL-LATENCY-TEST-/" target="_blank">Complete MLT Scores — 420+</a></li>
+        <li><a href="https://geniusmensaeinstein-prog.github.io/MORAL-LATENCY-TEST-1/" target="_blank">Political Neutrality Framework</a></li>
+        <li><a href="https://geniusmensaeinstein-prog.github.io/Mega-Drive-/" target="_blank">MEGA Drive Test Documentation</a></li>
+        <li><a href="https://geniusmensaeinstein-prog.github.io/AI-Bias-Test-/" target="_blank">AI Bias Evaluation Testing</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Support Our Work</h5>
+      <p>Core Signal Group is entirely community-funded. Your contribution directly sustains independent AI safety research that serves the public interest.</p>
+      <br/>
+      <a href="https://cash.app/$CoreSignalGroup" target="_blank" rel="noopener noreferrer" class="btn-donate" style="font-size:0.78rem;padding:13px 28px;display:inline-block;margin-top:4px;">▶ &nbsp;Donate via Cash App</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 <span>Core Signal Group</span> &nbsp;·&nbsp; Independent AI Safety &amp; Advanced Propulsion Research &nbsp;·&nbsp; All findings published open-access &nbsp;·&nbsp; Funded entirely by community support</p>
+  </div>
+</footer>
+
+</body>
+</html>
